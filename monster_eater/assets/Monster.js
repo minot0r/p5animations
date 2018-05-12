@@ -8,6 +8,24 @@ function Monster(x, y){
 		fill(color(122, 66, 244));
 		ellipseMode(CENTER);
 		ellipse(this.position.x, this.position.y, 10, 10);
+		beginShape();
+			vertex(this.position.x, this.position.y+10);
+			vertex(this.position.x-20, this.position.y-20);
+			vertex(this.position.x, this.position.y-10);
+			vertex(this.position.x+20, this.position.y-20);
+		endShape(CLOSE);
+		beginShape();
+			vertex(this.position.x-5, this.position.y-5);
+			vertex(this.position.x-20, this.position.y);
+			vertex(this.position.x+5, this.position.y+5);
+
+			vertex(this.position.x+5, this.position.y-5);
+			vertex(this.position.x+20, this.position.y);
+			vertex(this.position.x-5, this.position.y+5);
+		endShape(CLOSE);
+		fill(0);
+		ellipse(this.position.x-3, this.position.y-5, 2, 2);
+		ellipse(this.position.x+3, this.position.y-5, 2, 2);
 	}
 
 	this.moveTowards = function(object){
@@ -30,7 +48,7 @@ function Monster(x, y){
 			var distanceBetweenMAndO = this.position.dist(list[object].position);
 			if(distanceBetweenMAndO < shortestDistance){
 				stroke(color(244, 66, 66));
-				strokeWeight(1.5);
+				strokeWeight(1);
 				if(drawLines)
 					line(this.position.x, this.position.y, list[object].position.x, list[object].position.y);
 				shortestDistance = distanceBetweenMAndO;
@@ -39,7 +57,7 @@ function Monster(x, y){
 		}
 
 
-		if(typeof nearest !== 'undefined' && shortestDistance <= 5) {
+		if(typeof nearest !== 'undefined' && shortestDistance <= 7) {
 			list.splice(nearest, 1);
 			list.push(new Fruit(random(wWidth), random(wHeight)));
 		} else {
