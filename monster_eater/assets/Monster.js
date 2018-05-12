@@ -1,7 +1,7 @@
 function Monster(x, y){
 	this.position = createVector(x, y);
 	this.direction = createVector(0, 0);
-	this.acceleration = createVector(0, 0);
+	this.force = createVector(0, 0);
 
 	this.render = function(){
 		noStroke();
@@ -12,27 +12,43 @@ function Monster(x, y){
 
 	this.moveTowards = function(object){
 		var newDirection = p5.Vector.sub(object, this.position);
+		newDirection.setMag(5); /* Maximum length of the vector = speedness */
 
 		var newDirectionMovement = p5.Vector.sub(newDirection, this.direction);
+		newDirectionMovement.limit(0.1); /* Limit force */
 
-		push();
-			translate(this.position.x, this.position.y);
-			stroke('red');
-			line(0, 0, this.direction.x*10, this.direction.y*10);
-			stroke('blue');
-			line(0, 0, newDirection.x, newDirection.y);
-			stroke('green');
-			line(0, 0, newDirectionMovement.x, newDirectionMovement.y);
-		pop();
-
-
-		newDirectionMovement.limit(0.1); /* Limit speed */
-
-		this.acceleration.add(newDirectionMovement);
-		this.direction.add(this.acceleration);
+		this.force.add(newDirectionMovement);
+		this.direction.add(this.force);
 		this.position.add(this.direction);
-		this.acceleration.mult(0);
+		this.force.mult(0);
 	}
 
+	this.findNearestIn = function(list, drawLines){
+		var nearest;
+		var shortestDistance = Number.MAX_SAFE_INTEGER;
+		for(object in list){
+			var distanceBetweenMAndO = this.position.dist(list[object].position);
+			if(distanceBetweenMAndO < shortestDistance){
+				stroke(color(244, 66, 66));
+				strokeWeight(1.5);
+				if(drawLines)
+					line(this.position.x, this.position.y, list[object].position.x, list[object].position.y);
+				shortestDistance = distanceBetweenMAndO;
+				nearest = object;
+			}
+		}
+
+
+		if(typeof nearest !== 'undefined' && shortestDistance <= 5) {
+			list.splice(nearest, 1);
+			list.push(new Fruit(random(wWidth), random(wHeight)));
+		} else {
+			this.moveTowards(list[nearest].position);
+			stroke(color(65, 244, 98));
+			strokeWeight(2);
+				if(drawLines)
+					line(this.position.x, this.position.y, list[nearest].position.x, list[nearest].position.y);
+		}
+	}
 
 }
