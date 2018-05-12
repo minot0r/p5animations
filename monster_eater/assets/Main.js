@@ -23,5 +23,5 @@ function draw(){
 	}
 
 	monster.render();
-	monster.findNearestIn(fruits, true);
+	monster.findNearestIn(fruits, false);
 }
