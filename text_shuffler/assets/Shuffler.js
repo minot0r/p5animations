@@ -36,5 +36,9 @@ function Shuffler(basis, fadeIn, fadeOut, element, chars){
 
 }
 
-var s = new Shuffler('Text swapper algorithm designed by minot0r', 10000, 2000, document.getElementById('content'), '!<>-_\\/[]{}Ã¢â‚¬â€=+*^?#________'.split(''))
-s.shuffle(Date.now());
+window.
+
+window.onload = function(e){
+    var s = new Shuffler('minot0r', 2000, 1000, document.getElementById('content'), '!<>-_\\/[]{}Ã¢â‚¬â€=+*^?#________'.split(''))
+    s.shuffle(Date.now());
+}
