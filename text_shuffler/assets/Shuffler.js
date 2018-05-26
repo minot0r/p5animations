@@ -41,4 +41,7 @@ window.
 window.onload = function(e){
     var s = new Shuffler('minot0r', 2000, 1000, document.getElementById('content'), '!<>-_\\/[]{}Ã¢â‚¬â€=+*^?#________'.split(''))
     s.shuffle(Date.now());
+    setInterval(function(){
+        s.shuffle(Date.now());
+    }, 5000);
 }
