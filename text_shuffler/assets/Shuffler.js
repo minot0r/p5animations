@@ -1,6 +1,6 @@
-function Shuffler(basis, fadeIn, fadeOut, element, chars){
-    this.basis = basis.split('');
-    this.new = basis.split('');
+function Shuffler(fadeIn, fadeOut, element, chars){
+    this.basis;
+    this.new;
     this.fadeIn = fadeIn;
     this.fadeOut = fadeOut;
     this.element = element;
@@ -13,7 +13,7 @@ function Shuffler(basis, fadeIn, fadeOut, element, chars){
         this.element.innerHTML = this.new.join('');
         if(Date.now() - startupTime < this.fadeIn){
             let that = this;
-            setTimeout(function() { that.shuffle(startupTime) }, 100);
+            setTimeout(function() { that.shuffle(startupTime) }, 50);
         }else{
             this.unshuffle(this.createSequence(), this.basis, 0, this.element);
         }
@@ -34,14 +34,30 @@ function Shuffler(basis, fadeIn, fadeOut, element, chars){
         return sequence;
     }
 
+    this.run = function(text){
+        this.basis = text.split('');
+        this.new = text.split('');
+        this.shuffle(Date.now());
+    }
+
 }
 
-window.
 
 window.onload = function(e){
-    var s = new Shuffler('minot0r', 2000, 1000, document.getElementById('content'), '!<>-_\\/[]{}Ã¢â‚¬â€=+*^?#________'.split(''))
-    s.shuffle(Date.now());
-    setInterval(function(){
-        s.shuffle(Date.now());
-    }, 5000);
+    const phrases = ['minot0r', 'the', 'web', 'developer'];
+    var s = new Shuffler(2000, 500, document.getElementById('content'), '!<>-_\\/[]{}Ã¢â‚¬â€=+*^?#________'.split(''))
+    loop(phrases, 0);
+
+    function loop(phrases, index) {
+        s.run(phrases[index]);
+        if(index < phrases.length-1){
+            setTimeout(function() {
+                loop(phrases, index+1);
+            }, 2000+500+1000);
+        }else{
+            setTimeout(function() {
+                loop(phrases, 0);
+            }, 2000+500+1000);
+        }
+    }
 }
