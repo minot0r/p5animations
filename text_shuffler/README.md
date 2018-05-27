@@ -4,6 +4,7 @@
 
 Want to add this animation on a specified text ?
 *Using pure JavaScript*:
+
     /* Method 1 */
     var el = document.getElementById('my-text'); // Assuming you have an element with 'my-text' as id
     
@@ -12,6 +13,7 @@ Want to add this animation on a specified text ?
     // With this method, in the query selector you can add any type of element: classes, id, html elements (h1, a, div, span...)    
 
 *Using jQuery*:
+
     var el = $('.my-text');
     // or
     var el = $('#my-text');
