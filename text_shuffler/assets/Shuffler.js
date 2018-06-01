@@ -56,7 +56,7 @@ function Shuffler(fadeIn, fadeOut, element, chars){
 
 
 window.onload = function(e){
-    const phrases = ['minot0r', 'the', 'web', 'developer'];
+    const phrases = ['BRONCA', 'bronca.fr', 'Valentin GIORGETTI', 'Emilien BIDET'];
     var s = new Shuffler(2000, 500, document.getElementById('content'), '!<>-_\\/[]{}Ã¢â‚¬â€=+*^?#________'.split(''))
     s.run(phrases, 0);
 }
